@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Juana Soledad Espindola Jardin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2C3E50;
+            --secondary: #E74C3C;
+            --accent: #3498DB;
+            --light: #ECF0F1;
+            --dark: #34495E;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            padding: 50px 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .photo-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid var(--secondary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--primary);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+        }
+
+        .contact-item i {
+            color: var(--secondary);
+        }
+
+        .buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+        }
+
+        .btn-pdf {
+            background: var(--secondary);
+        }
+
+        .btn-pdf:hover {
+            background: #C0392B;
+            transform: scale(1.1);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, var(--light) 0%, #BDC3C7 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .skill-name {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .skill-description {
+            color: var(--dark);
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .experience-item, .education-item {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover, .education-item:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .item-title {
+            font-size: 1.3em;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .item-subtitle {
+            color: var(--accent);
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .item-date {
+            color: var(--secondary);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .item-description {
+            color: var(--dark);
+            line-height: 1.8;
+        }
+
+        .item-description ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .item-description li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .buttons {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media print {
+            .buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="buttons">
+        <button class="btn btn-whatsapp" onclick="openWhatsApp()" title="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="btn btn-pdf" onclick="generatePDF()" title="Descargar PDF">
+            <i class="fas fa-file-pdf"></i>
+        </button>
+    </div>
+
+    <div class="container" id="cv-content">
+        <div class="header">
+            <div class="photo-container">
+                <i class="fas fa-user"></i>
+            </div>
+            <h1>Juana Soledad Espindola Jardin</h1>
+            <div class="subtitle">Profesional Área Comercial</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Posadas, Misiones, Argentina</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+54 9 XXX XXX-XXXX</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>juanaespindola@email.com</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-user-tie"></i>
+                    Perfil Profesional
+                </div>
+                <p style="color: var(--dark); line-height: 1.8; font-size: 1.05em;">
+                    Profesional orientada al área comercial con sólidas competencias en gestión de relaciones con clientes, 
+                    negociación estratégica y desarrollo de mercados. Mi enfoque proactivo y visión innovadora me permiten 
+                    identificar oportunidades de negocio, construir vínculos duraderos con stakeholders y adaptarme 
+                    eficientemente a entornos dinámicos y desafiantes. Comprometida con el logro de resultados y 
+                    la excelencia en el servicio al cliente.
+                </p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-star"></i>
+                    Competencias Profesionales
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-name">Orientación a Resultados</div>
+                        <div class="skill-description">Enfoque sistemático en el cumplimiento de objetivos comerciales y metas establecidas</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">Gestión de Relaciones</div>
+                        <div class="skill-description">Capacidad para establecer y mantener vínculos estratégicos con clientes y partners</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">Negociación Efectiva</div>
+                        <div class="skill-description">Habilidad para alcanzar acuerdos beneficiosos manteniendo relaciones sostenibles</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">Pensamiento Estratégico</div>
+                        <div class="skill-description">Visión integral del mercado para identificar oportunidades y mitigar riesgos</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">Resolución de Problemas</div>
+                        <div class="skill-description">Análisis crítico y toma de decisiones ágiles ante situaciones complejas</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">Flexibilidad Operativa</div>
+                        <div class="skill-description">Capacidad de ajuste rápido a cambios del mercado y necesidades del cliente</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">Proactividad Comercial</div>
+                        <div class="skill-description">Iniciativa constante en la búsqueda de nuevas oportunidades de negocio</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name">Trabajo Colaborativo</div>
+                        <div class="skill-description">Sinergia efectiva con equipos multidisciplinarios para alcanzar objetivos comunes</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-briefcase"></i>
+                    Experiencia Profesional
+                </div>
+                <div class="experience-item">
+                    <div class="item-title">Ejecutiva de Cuentas Comerciales</div>
+                    <div class="item-subtitle">Empresa Regional de Servicios</div>
+                    <div class="item-date">Marzo 2021 - Actualidad</div>
+                    <div class="item-description">
+                        <ul>
+                            <li>Gestión de cartera de 50+ clientes corporativos con facturación anual de $XX millones</li>
+                            <li>Incremento del 35% en ventas mediante estrategias de cross-selling y up-selling</li>
+                            <li>Desarrollo e implementación de planes comerciales territoriales</li>
+                            <li>Negociación de contratos de alto valor con empresas del sector privado</li>
+                            <li>Coordinación con áreas de operaciones para garantizar satisfacción del cliente</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="item-title">Asesora Comercial</div>
+                    <div class="item-subtitle">Comercio Regional</div>
+                    <div class="item-date">Enero 2019 - Febrero 2021</div>
+                    <div class="item-description">
+                        <ul>
+                            <li>Atención personalizada a clientes y prospección de nuevos mercados</li>
+                            <li>Superación consistente de metas mensuales de ventas (promedio 120%)</li>
+                            <li>Capacitación de personal junior en técnicas de ventas y atención al cliente</li>
+                            <li>Participación en ferias comerciales regionales representando a la empresa</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    Formación Académica
+                </div>
+                <div class="education-item">
+                    <div class="item-title">Licenciatura en Administración de Empresas</div>
+                    <div class="item-subtitle">Universidad Nacional de Misiones</div>
+                    <div class="item-date">2015 - 2019</div>
+                </div>
+                <div class="education-item">
+                    <div class="item-title">Diplomatura en Marketing Digital y Comercio Electrónico</div>
+                    <div class="item-subtitle">Instituto de Formación Profesional</div>
+                    <div class="item-date">2020</div>
+                </div>
+                <div class="education-item">
+                    <div class="item-title">Certificación en Negociación y Ventas Estratégicas</div>
+                    <div class="item-subtitle">Cámara de Comercio de Misiones</div>
+                    <div class="item-date">2021</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-globe"></i>
+                    Idiomas y Tecnología
+                </div>
+                <div class="experience-item">
+                    <div class="item-description">
+                        <p><strong>Idiomas:</strong> Español (nativo) | Inglés (intermedio - B1)</p>
+                        <p style="margin-top: 15px;"><strong>Herramientas Tecnológicas:</strong> Microsoft Office Suite (Excel avanzado), CRM Salesforce, Google Workspace, Herramientas de análisis de datos, Plataformas de e-commerce</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openWhatsApp() {
+            const phone = '5493XXXXXXXXX';
+            const message = encodeURIComponent('Hola Juana, vi tu CV y me gustaría ponerme en contacto contigo.');
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        }
+
+        function generatePDF() {
+            const element = document.getElementById('cv-content');
+            const buttons = document.querySelector('.buttons');
+            
+            buttons.style.display = 'none';
+            
+            const opt = {
+                margin: 10,
+                filename: 'CV_Juana_Espindola_Jardin.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                buttons.style.display = 'flex';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
